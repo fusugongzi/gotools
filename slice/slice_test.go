@@ -1,6 +1,9 @@
 package slice
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestContains(t *testing.T) {
 	type args struct {
@@ -95,4 +98,24 @@ func TestContainsIgnoreCase(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestToMap(t *testing.T) {
+	type Student struct {
+		Name  string
+		Score int
+	}
+	students := make([]Student, 0)
+	students = append(students, Student{
+		Name:  "aa",
+		Score: 1,
+	})
+	students = append(students, Student{
+		Name:  "bb",
+		Score: 2,
+	})
+	m := ToMap(students, func(s Student) string {
+		return s.Name
+	})
+	fmt.Println(m)
 }
