@@ -33,7 +33,7 @@ func Index[T rune | string](items []T, item T) int {
 
 type any = interface{}
 
-func ToMap[T any, R int | int32 | int64 | string](items []T, keyFunc func(item T) R) map[R]any {
+func ToMap[T any, R comparable](items []T, keyFunc func(item T) R) map[R]any {
 	m := make(map[R]any, 0)
 	for _, v := range items {
 		m[keyFunc(v)] = v
