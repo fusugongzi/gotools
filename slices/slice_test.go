@@ -119,3 +119,10 @@ func TestToMap(t *testing.T) {
 	})
 	fmt.Println(m)
 }
+
+func TestFliter(t *testing.T) {
+	s := []string{"abc", "a", "c", ""}
+	fmt.Println(Fliter(s, func(v string) bool {
+		return v != ""
+	}))
+}

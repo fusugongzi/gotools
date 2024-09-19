@@ -38,3 +38,15 @@ func ToMap[T any, R comparable](items []T, keyFunc func(item T) R) map[R]any {
 	}
 	return m
 }
+
+// Filter return all elements match predicate
+func Fliter[T any](items []T, predicate func(T) bool) []T {
+	result := make([]T, 0)
+	for _, v := range items {
+		v := v
+		if predicate(v) {
+			result = append(result, v)
+		}
+	}
+	return result
+}
