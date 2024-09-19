@@ -1,4 +1,4 @@
-package Set
+package sets
 
 type set[T comparable, R any] struct {
 	items   []R
