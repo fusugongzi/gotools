@@ -1,6 +1,6 @@
 package maps
 
-import "gotools/sets"
+import "github.com/fusugongzi/gotools/sets"
 
 func KeySet[T comparable, R any](m map[T]R) []T {
 	result := make([]T, 0)
