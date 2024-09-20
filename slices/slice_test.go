@@ -126,3 +126,32 @@ func TestFliter(t *testing.T) {
 		return v != ""
 	}))
 }
+
+func TestDistinct(t *testing.T) {
+	is := Distinct([]int{1, 2, 2, 3, 4, 3, 1})
+	fmt.Println(is)
+
+	ss := Distinct([]string{"aa", "bb", "cc", "bb"})
+	fmt.Println(ss)
+}
+
+func TestDistinctI(t *testing.T) {
+	type Student struct {
+		Name  string
+		Score int
+	}
+	students := make([]Student, 0)
+	students = append(students, Student{
+		Name:  "aa",
+		Score: 1,
+	})
+	students = append(students, Student{
+		Name:  "bb",
+		Score: 2,
+	})
+	students = append(students, Student{
+		Name:  "aa",
+		Score: 3,
+	})
+	fmt.Println(DistinctI(students, func(s Student) string { return s.Name }))
+}

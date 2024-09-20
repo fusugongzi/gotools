@@ -50,3 +50,30 @@ func Fliter[T any](items []T, predicate func(T) bool) []T {
 	}
 	return result
 }
+
+// Distinct delete repeated element, keep origin order
+func Distinct[T comparable](items []T) []T {
+	result := make([]T, 0)
+	m := make(map[T]struct{}, 0)
+	for _, item := range items {
+		if _, ok := m[item]; !ok {
+			m[item] = struct{}{}
+			result = append(result, item)
+		}
+	}
+	return result
+}
+
+// Distinct delete repeated element judge by distinctFunc, keep origin order
+func DistinctI[T any, R comparable](items []T, distinctFunc func(T) R) []T {
+	result := make([]T, 0)
+	m := make(map[R]struct{}, 0)
+	for _, item := range items {
+		key := distinctFunc(item)
+		if _, ok := m[key]; !ok {
+			m[key] = struct{}{}
+			result = append(result, item)
+		}
+	}
+	return result
+}
