@@ -155,3 +155,39 @@ func TestDistinctI(t *testing.T) {
 	})
 	fmt.Println(DistinctI(students, func(s Student) string { return s.Name }))
 }
+
+func TestSearch(t *testing.T) {
+	type args struct {
+		items  []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "not exist",
+			args: args{
+				items:  []int{3, 1, 2, 8},
+				target: 12,
+			},
+			want: -1,
+		},
+		{
+			name: "exist",
+			args: args{
+				items:  []int{3, 1, 2, 8},
+				target: 2,
+			},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Search(tt.args.items, tt.args.target); got != tt.want {
+				t.Errorf("Search() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

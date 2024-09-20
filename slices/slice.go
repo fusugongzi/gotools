@@ -77,3 +77,14 @@ func DistinctI[T any, R comparable](items []T, distinctFunc func(T) R) []T {
 	}
 	return result
 }
+
+// Search return the first index of target
+// If not exist, return -1
+func Search[T comparable](items []T, target T) int {
+	for i, v := range items {
+		if v == target {
+			return i
+		}
+	}
+	return -1
+}
