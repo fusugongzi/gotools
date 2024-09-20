@@ -191,3 +191,27 @@ func TestSearch(t *testing.T) {
 		})
 	}
 }
+
+func TestGroupBy(t *testing.T) {
+	type Student struct {
+		Name  string
+		Score int
+	}
+	students := make([]Student, 0)
+	students = append(students, Student{
+		Name:  "aa",
+		Score: 1,
+	})
+	students = append(students, Student{
+		Name:  "bb",
+		Score: 2,
+	})
+	students = append(students, Student{
+		Name:  "aa",
+		Score: 3,
+	})
+	ss := GroupBy(students, func(s Student) string {
+		return s.Name
+	})
+	fmt.Println(ss)
+}

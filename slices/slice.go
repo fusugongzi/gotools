@@ -88,3 +88,12 @@ func Search[T comparable](items []T, target T) int {
 	}
 	return -1
 }
+
+func GroupBy[T any, R comparable](items []T, keyFunc func(T) R) map[R][]T {
+	result := map[R][]T{}
+	for _, item := range items {
+		key := keyFunc(item)
+		result[key] = append(result[key], item)
+	}
+	return result
+}
