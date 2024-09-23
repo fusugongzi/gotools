@@ -42,3 +42,8 @@ func TestValueSet(t *testing.T) {
 	}
 	fmt.Println(ValueSet(m, func(s Student) int { return s.Id }))
 }
+
+func TestMerge(t *testing.T) {
+	got := Merge(map[int]int{1: 1, 3: 3}, map[int]int{2: 2})
+	fmt.Println(got)
+}

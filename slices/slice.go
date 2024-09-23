@@ -1,6 +1,10 @@
 package slices
 
-import "strings"
+import (
+	"crypto/rand"
+	"math/big"
+	"strings"
+)
 
 func Contains[T int | string](items []T, item T) bool {
 	for _, eachItem := range items {
@@ -43,7 +47,6 @@ func ToMap[T any, R comparable](items []T, keyFunc func(item T) R) map[R]any {
 func Fliter[T any](items []T, predicate func(T) bool) []T {
 	result := make([]T, 0)
 	for _, v := range items {
-		v := v
 		if predicate(v) {
 			result = append(result, v)
 		}
@@ -94,6 +97,38 @@ func GroupBy[T any, R comparable](items []T, keyFunc func(T) R) map[R][]T {
 	for _, item := range items {
 		key := keyFunc(item)
 		result[key] = append(result[key], item)
+	}
+	return result
+}
+
+func Merge[T any](items ...[]T) []T {
+	result := make([]T, 0)
+	for _, item := range items {
+		for _, v := range item {
+			result = append(result, v)
+		}
+	}
+	return result
+}
+
+func Random[T any](items []T) T {
+	idx, _ := rand.Int(rand.Reader, big.NewInt(int64(len(items))))
+	return items[idx.Int64()]
+}
+
+func Randoms[T any](items []T, nums int) []T {
+	result := make([]T, nums)
+	for i := 0; i < nums; i++ {
+		idx, _ := rand.Int(rand.Reader, big.NewInt(int64(len(items))))
+		result[i] = items[idx.Int64()]
+	}
+	return result
+}
+
+func MapToFixed[T comparable, R any](items []T, value R) map[T]R {
+	result := make(map[T]R, 0)
+	for _, item := range items {
+		result[item] = value
 	}
 	return result
 }

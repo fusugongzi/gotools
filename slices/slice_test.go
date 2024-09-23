@@ -121,9 +121,9 @@ func TestToMap(t *testing.T) {
 }
 
 func TestFliter(t *testing.T) {
-	s := []string{"abc", "a", "c", ""}
+	s := []string{"abc", "a", "c", "a", "d"}
 	fmt.Println(Fliter(s, func(v string) bool {
-		return v != ""
+		return v != "a"
 	}))
 }
 
@@ -214,4 +214,28 @@ func TestGroupBy(t *testing.T) {
 		return s.Name
 	})
 	fmt.Println(ss)
+}
+
+func TestMerge(t *testing.T) {
+	got := Merge([]int{1, 2, 4}, []int{3, 5})
+	fmt.Println(got)
+}
+
+func TestRandom(t *testing.T) {
+	fmt.Println(Random([]int{1, 2, 3, 4, 5}))
+	fmt.Println(Random([]int{1, 2, 3, 4, 5}))
+	fmt.Println(Random([]int{1, 2, 3, 4, 5}))
+	fmt.Println(Random([]int{1, 2, 3, 4, 5}))
+	fmt.Println(Random([]int{1, 2, 3, 4, 5}))
+}
+
+func TestRandoms(t *testing.T) {
+	fmt.Println(Randoms([]int{1, 2, 3, 4, 5}, 3))
+	fmt.Println(Randoms([]int{1, 2, 3, 4, 5}, 3))
+	fmt.Println(Randoms([]int{1, 2, 3, 4, 5}, 3))
+}
+
+func TestMapToFixed(t *testing.T) {
+	got := MapToFixed([]int{1, 2, 3}, "abc")
+	fmt.Println(got)
 }
