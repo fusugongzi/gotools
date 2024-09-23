@@ -26,7 +26,7 @@ func ContainsIgnoreCase(items []string, item string) bool {
 	return false
 }
 
-func Index[T rune | string](items []T, item T) int {
+func Index[T comparable](items []T, item T) int {
 	for idx, v := range items {
 		if v == item {
 			return idx
@@ -131,4 +131,25 @@ func MapToFixed[T comparable, R any](items []T, value R) map[T]R {
 		result[item] = value
 	}
 	return result
+}
+
+func Offset[T comparable](items []T, value T, offset int) T {
+	if len(items) == 0 {
+		return value
+	}
+	if offset <= 0 {
+		return value
+	}
+	if offset > len(items) {
+		offset = offset % len(items)
+	}
+	idx := Index(items, value)
+	if idx == -1 {
+		return value
+	}
+	newIdx := idx + offset
+	if newIdx >= len(items) {
+		newIdx = newIdx - len(items)
+	}
+	return items[newIdx]
 }

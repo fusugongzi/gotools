@@ -2,6 +2,7 @@ package slices
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -238,4 +239,61 @@ func TestRandoms(t *testing.T) {
 func TestMapToFixed(t *testing.T) {
 	got := MapToFixed([]int{1, 2, 3}, "abc")
 	fmt.Println(got)
+}
+
+func TestOffset(t *testing.T) {
+	type args struct {
+		items  []int
+		value  int
+		offset int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "not exist",
+			args: args{
+				items:  []int{1, 2, 3, 4},
+				value:  5,
+				offset: 5,
+			},
+			want: 5,
+		},
+		{
+			name: "exist",
+			args: args{
+				items:  []int{1, 2, 3, 4, 5},
+				value:  2,
+				offset: 2,
+			},
+			want: 4,
+		},
+		{
+			name: "exist",
+			args: args{
+				items:  []int{1, 2, 3, 4, 5},
+				value:  5,
+				offset: 1,
+			},
+			want: 1,
+		},
+		{
+			name: "exist",
+			args: args{
+				items:  []int{1, 2, 3, 4, 5},
+				value:  5,
+				offset: 21,
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Offset(tt.args.items, tt.args.value, tt.args.offset); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Offset() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
