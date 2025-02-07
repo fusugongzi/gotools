@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Contains[T int | string](items []T, item T) bool {
+func Contains[T comparable](items []T, item T) bool {
 	for _, eachItem := range items {
 		if eachItem == item {
 			return true
