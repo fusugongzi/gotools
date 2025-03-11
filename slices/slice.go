@@ -35,8 +35,8 @@ func Index[T comparable](items []T, item T) int {
 	return -1
 }
 
-func ToMap[T any, R comparable](items []T, keyFunc func(item T) R) map[R]any {
-	m := make(map[R]any, 0)
+func ToMap[T any, R comparable](items []T, keyFunc func(item T) R) map[R]T {
+	m := make(map[R]T, 0)
 	for _, v := range items {
 		m[keyFunc(v)] = v
 	}
